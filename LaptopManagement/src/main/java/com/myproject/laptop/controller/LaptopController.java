@@ -41,19 +41,20 @@ public class LaptopController {
 	}
 	
 	@PostMapping(value="/addlaptop")
-	public void addLaptop(@RequestBody Laptop lap) {
-		 service.addLaptop(lap);
+	public Laptop addLaptop(@RequestBody Laptop lap) {
+		 return service.addLaptop(lap);
 	}
 	
-	@DeleteMapping(value="/delete/{id}")
-	public void deleteById(@PathVariable Long id) {
-		service.deleteById(id);
+	@GetMapping(value="/delete/{id}")
+	public String deleteById(@PathVariable Long id) {
+		
+		return service.deleteById(id);
 	}
 	
 	@PutMapping("/update/{id}")
 	
-	public void update(@PathVariable("id") Long id,@RequestBody Laptop lap) {
-		service.update(id,lap);
+	public String update(@PathVariable("id") Long id,@RequestBody Laptop lap) {
+		return service.update(id,lap);
 	}
 	
 	
