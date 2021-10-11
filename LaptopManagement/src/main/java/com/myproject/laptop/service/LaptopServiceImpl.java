@@ -23,28 +23,32 @@ public class LaptopServiceImpl implements LaptopService{
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public String deleteById(Long id) {
 		// TODO Auto-generated method stub
-		repo.deleteById(id);;
+		repo.findById(id).orElseThrow();
+		repo.deleteById(id);
+		return "Deleted successfully";
 	}
 
 	@Override
-	public void addLaptop(Laptop lap) {
+	public Laptop addLaptop(Laptop lap) {
 		// TODO Auto-generated method stub
-		repo.save(lap);
+		return repo.save(lap);
 	}
 
 	@Override
 	
-	public void update(Long id, Laptop lap) {
+	public String update(Long id, Laptop lap) {
 		// TODO Auto-generated method stub
-		Laptop existingLaptop=repo.findById(id).orElseThrow(null);
+		Laptop existingLaptop=repo.findById(id).orElseThrow();
 		existingLaptop.setBrand(lap.getBrand());
 		existingLaptop.setModel(lap.getModel());
 		existingLaptop.setPrice(lap.getPrice());
 		existingLaptop.setRam(lap.getRam());
 		
 		repo.save(existingLaptop);
+		
+		return "Updated Successfully";
 	}
 
 	@Override
