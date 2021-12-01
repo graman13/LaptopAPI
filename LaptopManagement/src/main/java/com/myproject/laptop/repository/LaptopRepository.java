@@ -6,4 +6,5 @@ import com.myproject.laptop.entity.Laptop;
 
 public interface LaptopRepository extends JpaRepository<Laptop, Long>{
 
+
 }

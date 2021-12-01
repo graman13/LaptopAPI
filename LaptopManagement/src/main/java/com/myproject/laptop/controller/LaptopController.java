@@ -55,6 +55,7 @@ public class LaptopController {
 	
 	public String update(@PathVariable("id") Long id,@RequestBody Laptop lap) {
 		return service.update(id,lap);
+
 	}
 	
 	

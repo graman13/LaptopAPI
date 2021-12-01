@@ -24,7 +24,8 @@ public class Laptop {
 	private double price;
 	@NotNull
 	private String ram;
-	
+
+
 	
 	public Laptop() {
 		super();
