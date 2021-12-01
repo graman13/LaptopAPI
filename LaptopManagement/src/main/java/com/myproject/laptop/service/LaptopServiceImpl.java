@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.myproject.laptop.entity.Laptop;
+import com.myproject.laptop.repository.JDBCRepository;
 import com.myproject.laptop.repository.LaptopRepository;
 
 @Service
@@ -15,36 +16,43 @@ public class LaptopServiceImpl implements LaptopService{
 	
 	@Autowired
 	private LaptopRepository repo;
+	
+	@Autowired
+	private JDBCRepository jdbc;
 
 	@Override
 	public List<Laptop> getAllLaptops() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		return jdbc.getLaps();
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public String deleteById(Long id) {
 		// TODO Auto-generated method stub
-		repo.deleteById(id);;
+		repo.findById(id).orElseThrow();
+		repo.deleteById(id);
+		return "Deleted successfully";
 	}
 
 	@Override
-	public void addLaptop(Laptop lap) {
+	public Laptop addLaptop(Laptop lap) {
 		// TODO Auto-generated method stub
-		repo.save(lap);
+		return repo.save(lap);
 	}
 
 	@Override
 	
-	public void update(Long id, Laptop lap) {
+	public String update(Long id, Laptop lap) {
 		// TODO Auto-generated method stub
-		Laptop existingLaptop=repo.findById(id).orElseThrow(null);
+		Laptop existingLaptop=repo.findById(id).orElseThrow();
 		existingLaptop.setBrand(lap.getBrand());
 		existingLaptop.setModel(lap.getModel());
 		existingLaptop.setPrice(lap.getPrice());
 		existingLaptop.setRam(lap.getRam());
 		
 		repo.save(existingLaptop);
+		
+		return "Updated Successfully";
 	}
 
 	@Override
